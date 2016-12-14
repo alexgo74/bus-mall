@@ -32,7 +32,7 @@ function drawTable() {
       data: {
           labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water_can', 'wine_glass'],
           datasets: [{
-              label: '# of Votes',
+              label: '# of Clicks',
               data: allClicks,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
@@ -209,8 +209,7 @@ function handleClick(event) {
    return alert('Out of clicks');
   }
 
-  // after 10, remove event listeners on names
-  // after 10, show "Results" button
+  // after 10, show "Results"
   showThreePics();
   //displayList();
 }
