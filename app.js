@@ -17,7 +17,6 @@ var ctx = document.getElementById('myChart');
 
 // Global variables
 // -----------------
-
 var allProducts = [];
 var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water_can', 'wine_glass'];
 var newArray = [];
@@ -95,7 +94,6 @@ function drawTable() {
 
 // Constructor
 // -----------------
-
 function Product(name) {
   this.name = name;
   this.filePath = 'images/' + name + '.jpg';
@@ -153,7 +151,7 @@ function makeArrayOfThreeNumbers() {
 }
 //makeArrayOfThreeNumbers();
 
-
+// this will place three new images on the page
 function showThreePics() {
   makeArrayOfThreeNumbers();
   left.src = allProducts[newArray[0]].filePath;
@@ -162,11 +160,7 @@ function showThreePics() {
   allProducts[newArray[1]].views += 1;
   right.src = allProducts[newArray[2]].filePath;
   allProducts[newArray[2]].views += 1;
-
-
-// this will place three new images on the page
 }
-
 
 // function displayList() {
 //   picList.innerHTML = '';
@@ -209,7 +203,6 @@ function handleClick(event) {
     drawTable();
     return alert('Out of clicks');
   }
-
   // after 10, show "Results"
   showThreePics();
   //displayList();
