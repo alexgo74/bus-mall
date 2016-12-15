@@ -9,11 +9,10 @@
 // DOM variables
 // -----------------
 var picContainer = document.getElementById('pic-container');
-// var picList = document.getElementById('picList');
+var picList = document.getElementById('picList');
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
-var ctx = document.getElementById('myChart');
 
 // Global variables
 // -----------------
@@ -23,75 +22,6 @@ var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'ch
 var newArray = [];
 var oldArray = [];
 var clickCounter = 0;
-var allClicks = [];
-
-function drawTable() {
-  new Chart(ctx, {
-    type: 'bar',
-    width: 20,
-    data: {
-      labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water_can', 'wine_glass'],
-      datasets: [{
-        label: '# of Clicks',
-        data: allClicks,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:true
-          }
-        }]
-      }
-    }
-  });
-}
 
 // Constructor
 // -----------------
@@ -107,10 +37,9 @@ function Product(name) {
 
 // Instances
 // -----------------
-// for (var i = 0; i < names.length; i++) {
-//   new Product(names[i]);
-// }
-//console.table(allProducts);
+for (var i = 0; i < names.length; i++) {
+  new Product(names[i]);
+}
 
 // ++++++++++++++++++++++++++++
 // ++++++++++++++++++++++++++++
@@ -153,7 +82,6 @@ function makeArrayOfThreeNumbers() {
 }
 //makeArrayOfThreeNumbers();
 
-
 function showThreePics() {
   makeArrayOfThreeNumbers();
   left.src = allProducts[newArray[0]].filePath;
@@ -162,23 +90,20 @@ function showThreePics() {
   allProducts[newArray[1]].views += 1;
   right.src = allProducts[newArray[2]].filePath;
   allProducts[newArray[2]].views += 1;
-
-
 // this will place three new images on the page
 }
 
-
-// function displayList() {
-//   picList.innerHTML = '';
-//   for (var i = 0; i < allProducts.length; i++) {
-//     var liEl = document.createElement('li');
-//     var liEl2 = document.createElement('li');
-//     liEl.textContent = allProducts[i].name + ' has been clicked ' + allProducts[i].clicks + ' times';
-//     liEl2.textContent = allProducts[i].name + ' has been viewed ' + allProducts[i].views + ' times';
-//     picList.appendChild(liEl);
-//     picList.appendChild(liEl2);
-//   }
-// }
+function displayList() {
+  picList.innerHTML = '';
+  for (var i = 0; i < allProducts.length; i++) {
+    var liEl = document.createElement('li');
+    var liEl2 = document.createElement('li');
+    liEl.textContent = allProducts[i].name + ' has been clicked ' + allProducts[i].clicks + ' times';
+    liEl2.textContent = allProducts[i].name + ' has been viewed ' + allProducts[i].views + ' times';
+    picList.appendChild(liEl);
+    picList.appendChild(liEl2);
+  }
+}
 
 function handleClick(event) {
   event.preventDefault();
@@ -200,19 +125,13 @@ function handleClick(event) {
   }
   clickCounter += 1;
   // check whether total clicks <= 10
-  if (clickCounter > 11) {
-    localStorage.setItem('allProducts', JSON.stringify(allProducts));
-    for (var i = 0; i < allProducts.length; i++) {
-      allClicks[i] = allProducts[i].clicks;
-    }
-    // localStorage.setItem('allClicks', JSON.stringify(allClicks));
-    drawTable();
+  if (clickCounter > 10) {
     return alert('Out of clicks');
   }
 
   // after 10, show "Results"
   showThreePics();
-  //displayList();
+  displayList();
 }
 // ++++++++++++++++++++++++++++
 // ++++++++++++++++++++++++++++
@@ -221,14 +140,5 @@ function handleClick(event) {
 // ++++++++++++++++++++++++++++
 // ++++++++++++++++++++++++++++ctx
 
-if(localStorage.allProducts){
-  allProducts = JSON.parse(localStorage.allProducts);
-} else {
-  for (var i = 0; i < names.length; i++) {
-    new Product(names[i]);
-  }
-  var allProductsStringified = JSON.stringify(allProducts);
-  localStorage.setItem('allProducts', allProductsStringified);
-}
 showThreePics();
 picContainer.addEventListener('click', handleClick);
