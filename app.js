@@ -194,7 +194,7 @@ function handleClick(event) {
   }
   clickCounter += 1;
   // check whether total clicks <= 10
-  if (clickCounter > 10) {
+  if (clickCounter > 25) {
     localStorage.setItem('allProducts', JSON.stringify(allProducts));
     for (var i = 0; i < allProducts.length; i++) {
       allClicks[i] = allProducts[i].clicks;

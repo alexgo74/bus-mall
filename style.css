@@ -3,16 +3,19 @@ html {
 }
 
 body {
-  color: black;
   font-family: monospace;
   text-align: center;
   background-color: lightgrey;
 }
 
+h1 {
+  color: darkred;
+}
+
 ul, h2 {
+  color: black;
   list-style-type: none;
   font-family: Arial;
-
 }
 
 img {
